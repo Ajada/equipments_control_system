@@ -1,0 +1,19 @@
+version: '3.7'
+
+volumes:
+  mysqldata:
+    driver: local
+
+services:
+  database:
+    image: mysql
+    container_name: db_ecs
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_USER=wolftech
+      - MYSQL_PASSWORD=wolftech024681
+      - MYSQL_ROOT_PASSWORD=wolftech024681
+      - MYSQL_DATABASE=equipments_control_system
+    volumes:
+      - mysqldata:/data/mysql
