@@ -1,4 +1,4 @@
-<p align="center"><a href="https://wolftechti.com" target="_blank"><img width="300" src="{{asset('logo.png')}}" alt="logo.png" title="wolf logo"></a></p>
+<p align="center"><a href="https://wolftechti.com" target="_blank"><img width="300" src="public/logo.png" alt="logo.png" title="wolf logo"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
