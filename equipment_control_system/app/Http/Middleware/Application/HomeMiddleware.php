@@ -44,13 +44,25 @@ class HomeMiddleware
     /**
      * @param string $code
      */
-    public function checkEquipmentExists($code)
+    public function checkEquipmentExists($id)
     {
-        $home = HomeModel::whereIdentifierCode($code)->first();
+        $home = HomeModel::whereId($id)->first();
 
         !$home ? die(json_encode(['error' => 'equipment does not exists'])) : '';
 
         return $home;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function checkIdentifier($code)
+    {
+        $identifier = HomeModel::whereIdentifierCode($code)->first();
+
+        $identifier ? die(json_encode(['error' => 'this tag already exists'])) : '';
+
+        return $identifier;
     }
 
     /**
@@ -65,8 +77,8 @@ class HomeMiddleware
             !$request->filled('identifier_code') || 
                 !$request->filled('owner') ? die(json_encode(['error' => 'mandatory parameters undefined'])) : '';
      
-        $this->checkEquipmentExists($request->identifier_code);
-                
+        $this->checkEquipmentExists($request->id);
+
         return $request;
     }
 
@@ -78,7 +90,9 @@ class HomeMiddleware
      */
     public function checkRequestPut($request)
     {
-        $this->checkEquipmentExists($request->identifier_code);        
+        $this->checkEquipmentExists($request->id);        
+
+        $request->filled('identifier_code') ? $this->checkIdentifier($request->identifier_code) : '';
 
         return $request;
     }
@@ -88,7 +102,7 @@ class HomeMiddleware
      */
     public function checkRequestDelete($request)
     {
-        $this->checkEquipmentExists($request->identifier_code);
+        $this->checkEquipmentExists($request->id);
 
         return $request;
     }

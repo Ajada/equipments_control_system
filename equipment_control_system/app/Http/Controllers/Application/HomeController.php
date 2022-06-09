@@ -56,46 +56,46 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $code)
+    public function update(Request $request, $id)
     {
         $request->filled('name') ? 
             DB::table('inventory')
-                ->whereIdentifierCode($code)
+                ->whereId($id)
                     ->update([
                         'name' => $request->name
                     ]) : '';
 
         $request->filled('image') ? 
             DB::table('inventory')
-                ->whereIdentifierCode($code)
+                ->whereId($id)
                     ->update([
                         'image' => $request->image //make function separate
                     ]) : '';
 
-        $request->filled('identifier_code') ? 
+        $request->filled('identifier_code') ? // conflito
             DB::table('inventory')
-                ->whereIdentifierCode($code)
+                ->whereId($id)
                     ->update([
                         'identifier_code' => $request->identifier_code
                     ]) : '';
 
         $request->filled('type_maintenance') ? 
             DB::table('inventory')
-                ->whereIdentifierCode($code)
+                ->whereId($id)
                     ->update([
                         'type_maintenance' => $request->type_maintenance
                     ]) : '';
 
         $request->filled('owner') ? 
             DB::table('inventory')
-                ->whereIdentifierCode($code)
+                ->whereId($id)
                     ->update([
                         'owner' => $request->owner
                     ]) : '';
 
         $request->filled('name') ? 
             DB::table('inventory')
-                ->whereIdentifierCode($code)
+                ->whereId($id)
                     ->update([
                         'observation' => $request->observation
                     ]) : '';
@@ -112,6 +112,8 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        return 'destroy';
+        DB::table('inventory')->whereId($id)->delete();
+
+        return response()->json(['success' => 'equipment deleted successfully']);
     }
 }
