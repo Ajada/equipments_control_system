@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt.auth' => Tymon\JWTAuth\Http\Middleware\Authenticate::class,
         'home.verification' => \App\Http\Middleware\Application\HomeMiddleware::class,
+        'rented.verification' => \App\Http\Middleware\Client\RentedMiddleware::class,
     ];
 }

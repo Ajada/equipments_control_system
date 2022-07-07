@@ -17,6 +17,7 @@ class HomeModel extends Model
         'identifier_code',
         'type_maintenance',
         'owner',
+        'status',
         'observation'
     ];
 
